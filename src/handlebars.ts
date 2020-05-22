@@ -1,25 +1,26 @@
 import handlebars from 'handlebars';
 
 const H = handlebars.create();
+// TODO support user specified helpers
 H.registerHelper('slug', slug);
 H.registerHelper({
-    eq: function (v1, v2) {
-        return v1 === v2;
+    eq: function (v1, v2, options) {
+        return (v1 == v2) ? options.fn(this) : options.inverse(this);
     },
-    ne: function (v1, v2) {
-        return v1 !== v2;
+    ne: function (v1, v2, options) {
+        return (v1 != v2) ? options.fn(this) : options.inverse(this);
     },
-    lt: function (v1, v2) {
-        return v1 < v2;
+    lt: function (v1, v2, options) {
+        return (v1 < v2) ? options.fn(this) : options.inverse(this);
     },
-    gt: function (v1, v2) {
-        return v1 > v2;
+    gt: function (v1, v2, options) {
+        return (v1 > v2) ? options.fn(this) : options.inverse(this);
     },
-    lte: function (v1, v2) {
-        return v1 <= v2;
+    lte: function (v1, v2, options) {
+        return (v1 <= v2) ? options.fn(this) : options.inverse(this);
     },
-    gte: function (v1, v2) {
-        return v1 >= v2;
+    gte: function (v1, v2, options) {
+        return (v1 >= v2) ? options.fn(this) : options.inverse(this);
     },
     and: function () {
         return [...arguments].slice(0, -1).every(Boolean);
